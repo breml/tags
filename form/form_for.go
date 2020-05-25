@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/gobuffalo/flect"
+	"github.com/gobuffalo/nulls"
 	"github.com/gobuffalo/tags/v3"
 	"github.com/gobuffalo/validate/v3"
 	"github.com/gofrs/uuid"
@@ -236,6 +237,11 @@ func (f FormFor) value(field string) interface{} {
 	switch t := i.(type) {
 	case uuid.UUID:
 		return t.String()
+	case nulls.Time:
+		if t.Valid {
+			return t.Time
+		}
+		return nil
 	case tagValuer:
 		return t.TagValue()
 	case driver.Valuer:
