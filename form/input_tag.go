@@ -20,6 +20,19 @@ func (f Form) InputTag(opts tags.Options) *tags.Tag {
 	return tags.New("input", opts)
 }
 
+//DateTag generates a tag with type date and adds default format to be 2006-01-02
+func (f Form) DateTag(opts tags.Options) *tags.Tag {
+	if opts["type"] == nil {
+		opts["type"] = "date"
+	}
+	if opts["format"] == nil {
+		opts["format"] = "2006-01-02"
+	}
+
+	delete(opts, "tag_only")
+	return tags.New("input", opts)
+}
+
 //DateTimeTag generates a tag with type datetime-local and adds default format to be 2006-01-02T03:04
 func (f Form) DateTimeTag(opts tags.Options) *tags.Tag {
 	if opts["type"] == nil {

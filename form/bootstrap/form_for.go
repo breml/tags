@@ -70,6 +70,14 @@ func (f FormFor) DateTimeTag(field string, opts tags.Options) *tags.Tag {
 	})
 }
 
+// DateTag creates a input[type=date] for a field name passed
+func (f FormFor) DateTag(field string, opts tags.Options) *tags.Tag {
+	f.buildOptions(field, opts)
+	return divWrapper(opts, func(o tags.Options) tags.Body {
+		return f.FormFor.DateTag(field, opts)
+	})
+}
+
 //HiddenTag adds an input[type=hidden] to the formFor
 func (f FormFor) HiddenTag(field string, opts tags.Options) *tags.Tag {
 	opts = f.buildOptions(field, opts)

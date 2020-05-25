@@ -101,6 +101,13 @@ func (f FormFor) FileTag(field string, opts tags.Options) *tags.Tag {
 	return f.Form.FileTag(opts)
 }
 
+// DateTag creates a input[type=date] for a field name passed
+func (f FormFor) DateTag(field string, opts tags.Options) *tags.Tag {
+	f.buildOptions(field, opts)
+	f.addFormatTag(field, opts)
+	return f.Form.DateTag(opts)
+}
+
 // DateTimeTag creates a input[type=datetime-local] for a field name passed
 func (f FormFor) DateTimeTag(field string, opts tags.Options) *tags.Tag {
 	f.buildOptions(field, opts)
